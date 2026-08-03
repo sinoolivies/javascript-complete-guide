@@ -7,6 +7,8 @@ This roadmap outlines the complete learning path from JavaScript fundamentals to
 **Status**: In Progress
 **Estimated Time**: 4-6 weeks
 **Difficulty**: Beginner to Intermediate
+**Published Topics**: 01 Introduction, 02 Variables and Data Types, 03 Operators, 04 Control Flow
+**In Progress**: 05 Functions, 06 Arrays, 07 Objects, 08 Strings, 09 Loops, 10 DOM Basics
 
 ### Topics Covered
 
