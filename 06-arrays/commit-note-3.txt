@@ -1,0 +1,1 @@
+Commit 3: arrays — small note created for commit 3.
