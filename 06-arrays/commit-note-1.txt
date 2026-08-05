@@ -1,0 +1,1 @@
+Commit 1: arrays — small note created for commit 1.
