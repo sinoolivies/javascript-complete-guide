@@ -1,0 +1,1 @@
+Commit 7: arrays — small note created for commit 7.
