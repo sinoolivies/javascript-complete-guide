@@ -1,87 +1,64 @@
-# React Fundamentals: 7-Day Structured Study Plan
+# React Mastery: 2-Week Complete Curriculum (Week 1: Fundamentals)
 
-A day-by-day pedagogical curriculum designed to take you from Vanilla JavaScript to a confident React engineer.
-
----
-
-## 📅 Day 1: The React Mental Model & JSX Architecture
-- **Focus**: Understanding declarative UI and the Virtual DOM.
-- **Theory**: `theory.md` (Sections 1 & 2)
-- **Topics**:
-  - Imperative DOM manipulation vs Declarative state-driven UI.
-  - How the Virtual DOM works and how reconciliation diffs trees in memory.
-  - JSX compilation: How JSX transforms into `_jsx` / `React.createElement`.
-  - JSX syntax rules: Single root element, Fragments (`<></>`), self-closing tags.
-  - Attribute translation: `class` → `className`, `for` → `htmlFor`, camelCase naming.
-- **Practical Goal**: Write your first 5 functional components rendering dynamic text and calculations.
-- **Exercises**: Exercises 1–7 in `exercises.md`.
+A comprehensive 14-day pedagogical blueprint designed to take learners from JavaScript fundamentals to senior-level React architectural mastery.
 
 ---
 
-## 📅 Day 2: Functional Components, Props & Composition
-- **Focus**: Modular component hierarchy and data flow.
-- **Theory**: `theory.md` (Sections 3 & 4)
-- **Topics**:
-  - Creating clean functional components.
-  - Props as read-only inputs (immutability).
-  - Destructuring props with default fallback values.
-  - The special `children` prop and building container wrappers.
-  - Component composition vs inheritance.
-- **Practical Goal**: Build a reusable Card and Modal component system using `props.children`.
-- **Exercises**: Exercises 8–15 in `exercises.md`.
+## 🗓️ Master Timeline Overview
+
+- **Week 1 (Days 1–7)**: **React Fundamentals & Component Architecture** (`11-react-fundamentals`)
+- **Week 2 (Days 8–14)**: **Hooks, State Machines & Production Patterns** (`12-react-hooks`)
 
 ---
 
-## 📅 Day 3: Conditional Rendering & Edge Cases
-- **Focus**: Rendering dynamic interfaces cleanly.
-- **Theory**: `theory.md` (Section 5)
-- **Topics**:
-  - Ternary operator for binary choices (`isOnline ? <Badge /> : <Offline />`).
-  - Short-circuit logical AND (`hasUnread && <Dot />`).
-  - The "zero rendering bug": Why `count && <Badge />` renders `0` and how to fix it.
-  - Early returns for loading, error, and empty states.
-- **Practical Goal**: Build a User Dashboard Header with dynamic auth, badge, and maintenance banners.
-- **Exercises**: Exercises 16–22 in `exercises.md`.
+## 📅 Week 1 Daily Breakdown (Days 1–7)
 
----
+### 🗓️ Day 1: The React Mental Model & Virtual DOM
+- **Concept**: Declarative UI paradigm vs imperative DOM manipulation.
+- **Deep Dive**: Virtual DOM representation, reconciliation, and batching.
+- **Reading**: `day-01-mental-model-and-vdom.md` & `theory.md` (Section 1–2).
+- **Practical**: Inspect browser performance differences between direct DOM rewrites and React rendering.
+- **Exercises**: `exercises.md` (1–4).
 
-## 📅 Day 4: Dynamic Lists & Key Reconciliation
-- **Focus**: Iterating collections efficiently.
-- **Theory**: `theory.md` (Section 6)
-- **Topics**:
-  - Rendering arrays with `Array.prototype.map()`.
-  - The vital role of the `key` prop in React reconciliation.
-  - Why using array index as key creates state leakage and UI bugs in dynamic lists.
-  - Filtering and sorting arrays before rendering.
-- **Practical Goal**: Build a filterable Developer Course Catalog with category pills and instant search.
-- **Exercises**: Exercises 23–27 in `exercises.md`.
+### 🗓️ Day 2: JSX Architecture & Expressions
+- **Concept**: JSX syntax extension, under-the-hood compilation, and embedded expressions.
+- **Deep Dive**: `_jsx` runtime calls, Fragments (`<></>`), and attribute mapping (`className`, `htmlFor`).
+- **Reading**: `day-02-jsx-and-expressions.md` & `theory.md` (Section 3).
+- **Practical**: Write components rendering mathematical computations, template strings, and nested layouts.
+- **Exercises**: `exercises.md` (5–8).
 
----
+### 🗓️ Day 3: Functional Components, Props & Immutability
+- **Concept**: Pure components, unidirectional data flow, and read-only props.
+- **Deep Dive**: Destructuring with default fallbacks, prop contracts, and component hierarchy.
+- **Reading**: `day-03-components-and-props.md` & `theory.md` (Section 4–5).
+- **Practical**: Build reusable `Badge`, `Avatar`, and `PriceTag` components.
+- **Exercises**: `exercises.md` (9–13).
 
-## 📅 Day 5: Synthetic Events & Form Handling
-- **Focus**: User interaction and cross-browser event normalization.
-- **Theory**: `theory.md` (Section 7)
-- **Topics**:
-  - React's `SyntheticEvent` wrapper and root event delegation.
-  - Passing callbacks and arguments to event handlers.
-  - Preventing default browser actions with `e.preventDefault()`.
-  - Controlled inputs and form submission flows.
-- **Practical Goal**: Build an interactive search filter form and action button toolbar.
-- **Exercises**: Exercises 28–30 in `exercises.md`.
+### 🗓️ Day 4: Component Composition & `props.children`
+- **Concept**: Inversion of control and container design patterns.
+- **Deep Dive**: Using `props.children` to build reusable UI shells without prop drilling.
+- **Reading**: `day-04-composition-and-children.md`.
+- **Practical**: Build an accessible `ModalDialog` and a flexible `CardContainer` component.
+- **Exercises**: `exercises.md` (14–17).
 
----
+### 🗓️ Day 5: Conditional Rendering & Edge-Case Traps
+- **Concept**: Dynamic interface switching with clean guard clauses.
+- **Deep Dive**: Ternary operators, short-circuit `&&`, early returns, and preventing the "Zero Rendering Bug".
+- **Reading**: `day-05-conditional-rendering.md`.
+- **Practical**: Build an authentication banner with guest, member, and admin states.
+- **Exercises**: `exercises.md` (18–22).
 
-## 📅 Day 6: Real-World Portfolio & Showcase Challenges
-- **Focus**: Applying fundamentals to production-grade interfaces.
-- **Challenges**: Practical Challenges 1 & 2 in `practical.md`.
-  - Challenge 1: Developer Portfolio Card with dynamic badges, skills, and social links.
-  - Challenge 2: E-Commerce Product Showcase Card with discount and stock calculations.
-- **Review**: Check implementations against `solutions.jsx`.
+### 🗓️ Day 6: Dynamic Lists, Keys & Reconciliation Mechanics
+- **Concept**: Iterating collections with `Array.prototype.map()`.
+- **Deep Dive**: How React diffs keyed lists in Fiber, and why index keys cause state leakage and visual bugs.
+- **Reading**: `day-06-lists-keys-and-reconciliation.md`.
+- **Practical**: Build a searchable and filterable Developer Course Catalog with category chips.
+- **Exercises**: `exercises.md` (23–27).
 
----
-
-## 📅 Day 7: Best Practices, Common Pitfalls & Mastery Assessment
-- **Focus**: Code quality, architectural patterns, and review.
-- **Guides**: `best-practices.md` & `common-mistakes.md`.
-- **Review**: Complete the `summary.md` checklist.
-- **Milestone Check**: Ensure you can build clean, prop-driven component trees before starting React Hooks.
+### 🗓️ Day 7: Synthetic Events, Form Handling & Week 1 Capstone
+- **Concept**: Cross-browser SyntheticEvent normalization and delegated event dispatching.
+- **Deep Dive**: Event listeners on `#root`, preventing default actions (`e.preventDefault()`), passing arguments.
+- **Reading**: `day-07-events-and-forms.md`.
+- **Capstone Challenge**: Build the complete Developer Portfolio Card and E-Commerce Product Card from `practical.md`.
+- **Exercises**: `exercises.md` (28–30).
+- **Checkpoint**: Ensure all Week 1 exercises pass and review `best-practices.md` before starting Week 2.
