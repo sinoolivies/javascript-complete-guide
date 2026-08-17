@@ -38,6 +38,10 @@ This phase covers the essential building blocks of JavaScript:
 9. **Loops** - Repeating operations efficiently
 10. **DOM Basics** - Interacting with web pages
 
+### Phase 9: Frameworks & Modern Development (React)
+11. **React Fundamentals** - Components, JSX, Props, Conditional Rendering, Lists & Events
+12. **React Hooks** - useState, useEffect, useContext, useRef, useReducer, useMemo, Custom Hooks
+
 ### Phase 2: Advanced Practice (Future)
 - Comprehensive exercises and projects
 - Real-world application building
