@@ -1,28 +1,16 @@
 # Summary: React Fundamentals
 
-## Key Concepts Learned
+## Key Concepts Mastered
 
-### 1. The React Paradigm
-- React is a declarative, component-driven library for building reactive user interfaces.
-- The Virtual DOM enables lightning-fast reconciliation and minimal real DOM mutations.
-
-### 2. JSX Syntax
-- JSX combines the visual structure of HTML with the computational power of JavaScript.
-- JavaScript expressions are embedded via curly braces `{...}`.
-- Requires a single root element (or Fragment) and camelCase attribute naming.
-
-### 3. Components & Props
-- Functional components are pure functions accepting `props` and returning JSX.
-- Props are immutable data passed down from parent to child.
-- `props.children` enables flexible layout composition.
-
-### 4. Dynamic UI Logic
-- Conditional rendering via ternaries, logical `&&`, and early returns.
-- List rendering using `Array.prototype.map()` with unique `key` props.
-- Synthetic event system for handling user interaction cleanly across browsers.
+1. **The Declarative Paradigm**: Describing what UI looks like for any given state rather than issuing step-by-step DOM mutations.
+2. **Virtual DOM & Fiber Reconciliation**: High-performance rendering via in-memory diffing and batched real DOM patches.
+3. **JSX**: Compiling HTML-like syntax to pure JavaScript runtime calls.
+4. **Functional Components & Props**: Building pure, isolated components with unidirectional data flow and `props.children` composition.
+5. **Conditional & List Rendering**: Rendering dynamic UI with ternaries, safe logical `&&`, and keyed list reconciliation.
+6. **Synthetic Events**: Cross-browser event normalization and delegated event dispatching.
 
 ---
 
 ## Next Topic
 
-**12 - React Hooks**: Master `useState`, `useEffect`, `useContext`, `useRef`, `useMemo`, `useCallback`, and build powerful custom hooks for stateful React applications.
+**12 - React Hooks & State Management**: Dive into `useState`, `useEffect`, `useContext`, `useRef`, `useReducer`, performance memoization (`useMemo` / `useCallback`), and building custom hooks.
