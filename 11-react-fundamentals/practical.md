@@ -1,34 +1,39 @@
-# 11 - React Fundamentals: Practical Challenges
-
-These practical challenges mirror real-world frontend tasks. Build each component with clean JSX, prop validation, modular composition, and accessible markup.
+# 11 - React Fundamentals: Practical Real-World Challenges
 
 ---
 
-## Challenge 1: Developer Portfolio Profile Card
-Build a responsive profile card component for a software engineer:
-- **Props**: `name`, `title`, `avatarUrl`, `bio`, `skills` (array), `socialLinks` (array of objects with platform & URL), `isAvailableForHire` (boolean).
-- **Requirements**:
-  - Show a "Hire Me" badge if `isAvailableForHire` is true.
-  - Render skills as colored pill badges.
-  - Render social icons as external links.
+## Challenge 1: Developer Portfolio Card
+Build a responsive, modern developer profile card component.
+- **Props**:
+  - `name` (string)
+  - `title` (string)
+  - `bio` (string)
+  - `avatarUrl` (string)
+  - `skills` (array of strings)
+  - `socialLinks` (array of `{ platform, url, icon }`)
+  - `isAvailableForHire` (boolean)
+- **Features**:
+  - Render an "Available for Hire" green badge when `isAvailableForHire` is true.
+  - Render skills as styled pill badges.
+  - Render social links opening in a new tab safely.
 
 ---
 
-## Challenge 2: Interactive E-Commerce Product Card
-Create a complete product showcase card:
-- **Props**: `product` object containing `id`, `title`, `price`, `discountPercentage`, `rating`, `stock`, `thumbnail`, `onAddToCart` (callback).
-- **Requirements**:
-  - Calculate and display original price and discounted price.
-  - Show an "Out of Stock" banner and disable the Add to Cart button if `stock === 0`.
-  - Render star ratings dynamically.
+## Challenge 2: Dynamic E-Commerce Product Card
+Create a complete product display card with calculations.
+- **Props**: `product` object containing `id`, `title`, `price`, `discountPercent`, `rating`, `stock`, `image`, `onAddToCart`.
+- **Features**:
+  - Display original price with strikethrough if `discountPercent > 0` alongside computed discounted price.
+  - Render star ratings (★/☆).
+  - Disable Add to Cart button with an "Out of Stock" banner when `stock === 0`.
 
 ---
 
 ## Challenge 3: Multi-Category Filterable Course Catalog
-Build a course listing component:
-- **Props**: `courses` array, `selectedCategory`, `onSelectCategory`, `onEnroll`.
-- **Requirements**:
-  - Category selector buttons (All, Frontend, Backend, Mobile, DevOps).
-  - Filter courses based on active category.
-  - Calculate total duration of filtered courses.
-  - Handle empty state when no courses match.
+Build a course listing directory with category filtering.
+- **Props**: `courses` array, `selectedCategory`, `onCategorySelect`, `onEnroll`.
+- **Features**:
+  - Render category buttons (All, Frontend, Backend, Mobile, Cloud).
+  - Filter courses dynamically.
+  - Calculate total hours and course count for the active category.
+  - Display a clean empty-state card if no courses match.
