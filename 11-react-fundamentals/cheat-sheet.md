@@ -1,75 +1,57 @@
 # React Fundamentals: Quick Reference Cheat-Sheet
 
-## 1. JSX Syntax & Attributes
+## 1. JSX vs HTML Reference
 
-| HTML | JSX Equivalent | Notes |
+| HTML Attribute | JSX Equivalent | Explanation |
 | :--- | :--- | :--- |
-| `class="btn"` | `className="btn"` | `class` is a reserved keyword in JS |
-| `for="email"` | `htmlFor="email"` | `for` is a reserved keyword in JS |
-| `onclick="run()"` | `onClick={run}` | camelCase, pass function reference |
-| `style="color: red;"` | `style={{ color: 'red' }}` | Pass a JavaScript style object |
-| `<input>` | `<input />` | Self-closing tags are mandatory |
+| `class="container"` | `className="container"` | `class` is a JavaScript keyword |
+| `for="emailInput"` | `htmlFor="emailInput"` | `for` is a JavaScript loop keyword |
+| `tabindex="0"` | `tabIndex={0}` | camelCase attribute naming |
+| `style="color: red;"` | `style={{ color: 'red' }}` | Pass style as JavaScript object |
+| `<input>` | `<input />` | Mandatory self-closing tags |
+| `<!-- comment -->` | `{/* comment */}` | JavaScript comment syntax in JSX |
 
 ---
 
-## 2. Component Declaration
+## 2. Component Declaration Cheat-Sheet
 
 ```jsx
-// Standard Functional Component
-function Greeting({ name, greeting = "Hello" }) {
-  return <h1>{greeting}, {name}!</h1>;
+// Functional Component with Props Destructuring & Defaults
+export function UserBadge({ name, role = "User", unread = 0 }) {
+  return (
+    <div className="badge">
+      <span>{name} ({role})</span>
+      {unread > 0 && <span className="dot">{unread}</span>}
+    </div>
+  );
 }
-
-// Arrow Function Component
-const UserCard = ({ user }) => (
-  <div className="card">
-    <h3>{user.name}</h3>
-  </div>
-);
 ```
 
 ---
 
-## 3. Conditional Rendering Patterns
+## 3. Conditional Rendering Matrix
 
 ```jsx
-// 1. Ternary Operator
-<div>{isLoggedIn ? <UserDashboard /> : <LoginForm />}</div>
+// 1. Ternary Operator (Either / Or)
+{isLoggedIn ? <UserDashboard /> : <LoginPrompt />}
 
-// 2. Short-Circuit AND (&&)
-<div>{hasNotifications && <NotificationDot />}</div>
+// 2. Short-Circuit AND (Show / Hide)
+{hasUnread && <NotificationBadge count={count} />}
 
-// 3. Early Return in Function Body
-if (isLoading) return <Spinner />;
+// 3. Early Return (Guard Clauses)
+if (isLoading) return <LoadingSpinner />;
+if (error) return <ErrorMessage text={error} />;
 return <MainContent />;
 ```
 
 ---
 
-## 4. List Rendering with Keys
+## 4. List Rendering Rule of Thumb
 
 ```jsx
 <ul>
   {items.map((item) => (
-    <li key={item.id}>{item.name}</li>
+    <li key={item.id}>{item.title}</li>
   ))}
 </ul>
-```
-
----
-
-## 5. Event Handling Syntax
-
-```jsx
-// Simple Event Reference
-<button onClick={handleClick}>Click Me</button>
-
-// Event with Parameters (Inline Arrow Function)
-<button onClick={() => handleDelete(item.id)}>Delete</button>
-
-// Event Object Usage
-function handleChange(e) {
-  console.log("New value:", e.target.value);
-}
-<input onChange={handleChange} />
 ```
