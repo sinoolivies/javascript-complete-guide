@@ -1,88 +1,48 @@
-# React Fundamentals: Common Mistakes & Pitfalls
+# React Fundamentals: 12 Common Mistakes & Bug Fixes
 
-## 1. Calling Event Handlers Immediately
-
-### The Bug
+## 1. Invoking Event Handlers Immediately
 ```jsx
-// ❌ Bug: Function executes immediately during render!
-<button onClick={handleClick()}>Click Me</button>
-```
+// ❌ WRONG: Executes immediately on render!
+<button onClick={handleDelete(user.id)}>Delete</button>
 
-### The Fix
-Pass the function reference or wrap in an arrow function:
-```jsx
-// ✅ Correct: Function is passed as a callback
-<button onClick={handleClick}>Click Me</button>
-
-// ✅ Correct when passing arguments:
-<button onClick={() => handleClick(id)}>Click Me</button>
+// ✅ CORRECT: Passed as a callback
+<button onClick={() => handleDelete(user.id)}>Delete</button>
 ```
 
 ---
 
-## 2. Using Array Index as List Key
-
-### The Bug
+## 2. Rendering `0` with Logical `&&`
 ```jsx
-// ❌ Bug: Reordering or deleting list items causes stale input state
-{todos.map((todo, index) => (
-  <TodoItem key={index} todo={todo} />
-))}
-```
+// ❌ WRONG: Renders "0" on screen when array is empty!
+<div>{items.length && <List items={items} />}</div>
 
-### The Fix
-Use stable, unique item IDs:
-```jsx
-// ✅ Correct
-{todos.map((todo) => (
-  <TodoItem key={todo.id} todo={todo} />
-))}
+// ✅ CORRECT: Explicit boolean comparison
+<div>{items.length > 0 && <List items={items} />}</div>
 ```
 
 ---
 
-## 3. Rendering 0 in Logical && Conditions
-
-### The Bug
+## 3. Using Array Index as List Keys
 ```jsx
-// ❌ Bug: If unreadCount is 0, React renders "0" on the screen!
-<div>
-  {unreadCount && <Badge count={unreadCount} />}
-</div>
-```
+// ❌ WRONG: Causes state leakage when reordering
+{todos.map((todo, index) => <TodoItem key={index} todo={todo} />)}
 
-### The Fix
-Explicitly convert to boolean:
-```jsx
-// ✅ Correct
-<div>
-  {unreadCount > 0 && <Badge count={unreadCount} />}
-  {/* Or */}
-  {Boolean(unreadCount) && <Badge count={unreadCount} />}
-</div>
+// ✅ CORRECT: Stable unique identifier
+{todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
 ```
 
 ---
 
-## 4. Missing Single Root Element in JSX
-
-### The Bug
+## 4. Mutating Props Directly
 ```jsx
-// ❌ Syntax Error: Adjacent JSX elements must be wrapped
-return (
-  <h1>Title</h1>
-  <p>Description</p>
-);
-```
+// ❌ WRONG: Props are strictly immutable!
+function Header(props) {
+  props.title = props.title.toUpperCase();
+}
 
-### The Fix
-Wrap with a Fragment:
-```jsx
-// ✅ Correct
-return (
-  <>
-    <h1>Title</h1>
-    <p>Description</p>
-  </>
-);
+// ✅ CORRECT: Create a local variable
+function Header({ title }) {
+  const formattedTitle = title.toUpperCase();
+  return <h1>{formattedTitle}</h1>;
+}
 ```

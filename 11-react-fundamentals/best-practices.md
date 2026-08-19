@@ -2,64 +2,21 @@
 
 ## 1. Component Design & Composition
 
-### Keep Components Small and Single-Purpose
-A component should ideally do one thing well. If a component grows beyond 100-150 lines or handles multiple UI responsibilities, break it down into smaller subcomponents.
-
-### Prefer Function Components
-Always use functional components with modern hooks rather than legacy class components.
+1. **Single Responsibility Principle**: Each component should do one job well. If a component exceeds ~150 lines or handles multiple unrelated UI blocks, extract subcomponents.
+2. **Component Purity**: Components should be pure with respect to their inputs. Do not mutate variables declared outside the component during rendering.
+3. **Use Descriptive Names**: PascalCase for component files and names (`ProductCard.jsx`, `NavigationMenu.jsx`).
 
 ---
 
-## 2. Props & State Conventions
+## 2. Props Management
 
-### Destructure Props with Default Values
-Destructure props in the function signature for immediate readability of required inputs and fallbacks:
-```jsx
-// Good
-function Button({ label, variant = "primary", disabled = false, onClick }) { ... }
-
-// Avoid
-function Button(props) {
-  const label = props.label;
-  const variant = props.variant || "primary";
-}
-```
-
-### Treat Props as Read-Only
-Never attempt to modify `props.value = 10`. Props belong to the parent component and are immutable.
+1. **Destructure in Function Signature**: Always destructure props with sensible defaults for immediate clarity.
+2. **Never Mutate Props**: Props are read-only. Never assign values to `props.xyz`.
+3. **Use `props.children` for Generic Wrappers**: Favor composition over prop configuration when building layouts, modals, and cards.
 
 ---
 
-## 3. Lists and Keys
+## 3. List Rendering & Keys
 
-### Always Use Stable, Unique IDs for Keys
-Use database IDs (`item.id`) or unique identifiers:
-```jsx
-// Good
-{users.map((u) => <UserRow key={u.id} user={u} />)}
-
-// Avoid (causes reordering/rendering glitches)
-{users.map((u, index) => <UserRow key={index} user={u} />)}
-```
-
----
-
-## 4. Event Handler Performance
-
-### Avoid Unnecessary Inline Function Reallocations
-For static event handlers that don't need arguments, pass the stable function reference:
-```jsx
-// Good
-<button onClick={handleClick}>Save</button>
-
-// Only use arrow wrapper when passing item parameters
-<button onClick={() => handleDelete(item.id)}>Delete</button>
-```
-
----
-
-## 5. Clean JSX Formatting
-
-- Use Fragments (`<></>`) instead of redundant `<div>` wrappers to keep DOM tree clean.
-- Format multi-line JSX with parentheses `return ( ... );`.
-- Keep boolean props concise: `<Modal isOpen />` instead of `<Modal isOpen={true} />`.
+1. **Use Stable Unique IDs**: Always use database IDs (`item.id`) or unique identifiers as keys.
+2. **Never Use Array Index for Dynamic Lists**: Using `key={index}` creates rendering bugs when items are reordered, deleted, or sorted.
