@@ -1,99 +1,107 @@
-// 11 - React Fundamentals: Solutions for Exercises & Practical Challenges
+// 11 - React Fundamentals: Complete Solutions
 
 import React from 'react';
 
-// Solution 1: Greeting
-export function Greeting({ name = "Guest" }) {
+// Solution 2: UserGreeting
+export function UserGreeting({ firstName = "Guest", lastName = "" }) {
   return (
-    <section className="greeting-section">
-      <h1>Hello, {name}!</h1>
-    </section>
+    <div className="greeting-box p-4 bg-slate-50 border rounded-lg">
+      <h2 className="text-base font-semibold text-slate-800">
+        Welcome back, {firstName} {lastName}!
+      </h2>
+    </div>
   );
 }
 
-// Solution 3: PriceTag
-export function PriceTag({ amount, currency = "USD" }) {
+// Solution 3: CurrencyDisplay
+export function CurrencyDisplay({ amount, currencyCode = "USD" }) {
   const formatted = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: currency,
+    currency: currencyCode,
   }).format(amount);
 
-  return <span className="price-tag font-bold">{formatted}</span>;
+  return <span className="font-mono font-bold text-blue-600">{formatted}</span>;
 }
 
-// Solution 5: SkillPill
-export function SkillPill({ skill, level = "beginner" }) {
-  const levelColors = {
-    beginner: "bg-blue-100 text-blue-800",
-    intermediate: "bg-emerald-100 text-emerald-800",
-    expert: "bg-purple-100 text-purple-800",
-  };
+// Solution 12: InvoiceTable
+export function InvoiceTable({ items = [], taxRate = 0.10 }) {
+  const subtotal = items.reduce((acc, item) => acc + item.unitPrice * item.quantity, 0);
+  const tax = subtotal * taxRate;
+  const total = subtotal + tax;
 
   return (
-    <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${levelColors[level] || levelColors.beginner}`}>
-      {skill} • {level}
-    </span>
-  );
-}
+    <div className="border rounded-xl p-4 bg-white shadow-xs">
+      <table className="w-full text-left text-xs">
+        <thead>
+          <tr className="border-b text-slate-400">
+            <th className="pb-2">Description</th>
+            <th className="pb-2 text-right">Qty</th>
+            <th className="pb-2 text-right">Unit Price</th>
+            <th className="pb-2 text-right">Amount</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-100">
+          {items.map((item) => (
+            <tr key={item.id} className="py-2">
+              <td className="py-2 text-slate-800">{item.description}</td>
+              <td className="py-2 text-right">{item.quantity}</td>
+              <td className="py-2 text-right">${item.unitPrice.toFixed(2)}</td>
+              <td className="py-2 text-right font-medium">${(item.unitPrice * item.quantity).toFixed(2)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
 
-// Solution 12: CartList
-export function CartList({ items = [] }) {
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-  if (items.length === 0) {
-    return <div className="cart-empty text-gray-500">Your cart is empty.</div>;
-  }
-
-  return (
-    <div className="cart-container">
-      <ul className="divide-y divide-gray-200">
-        {items.map((item) => (
-          <li key={item.id} className="py-2 flex justify-between">
-            <span>{item.quantity}x {item.name}</span>
-            <span>${(item.price * item.quantity).toFixed(2)}</span>
-          </li>
-        ))}
-      </ul>
-      <div className="cart-total pt-3 font-bold flex justify-between border-t border-gray-300">
-        <span>Total:</span>
-        <span>${total.toFixed(2)}</span>
+      <div className="mt-4 pt-3 border-t text-xs space-y-1">
+        <div className="flex justify-between text-slate-600">
+          <span>Subtotal:</span>
+          <span>${subtotal.toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between text-slate-600">
+          <span>Tax ({(taxRate * 100).toFixed(0)}%):</span>
+          <span>${tax.toFixed(2)}</span>
+        </div>
+        <div className="flex justify-between font-bold text-sm text-slate-900 pt-1 border-t">
+          <span>Total:</span>
+          <span className="text-blue-600">${total.toFixed(2)}</span>
+        </div>
       </div>
     </div>
   );
 }
 
-// Practical Challenge 1: Portfolio Profile Card
+// Practical Challenge 1: Developer Portfolio Card
 export function PortfolioCard({
   name,
   title,
-  avatarUrl,
   bio,
+  avatarUrl,
   skills = [],
   socialLinks = [],
   isAvailableForHire = false,
 }) {
   return (
-    <div className="profile-card max-w-sm rounded-xl border border-gray-200 p-6 shadow-md bg-white">
+    <div className="max-w-sm bg-white border border-slate-200 rounded-2xl p-6 shadow-md">
       <div className="flex items-center gap-4">
-        <img src={avatarUrl} alt={name} className="w-16 h-16 rounded-full object-cover border" />
+        <img src={avatarUrl} alt={name} className="w-16 h-16 rounded-full object-cover border-2 border-blue-500" />
         <div>
-          <h3 className="text-lg font-bold text-gray-900">{name}</h3>
-          <p className="text-sm text-gray-600">{title}</p>
+          <h3 className="text-lg font-bold text-slate-900">{name}</h3>
+          <p className="text-xs text-slate-500">{title}</p>
           {isAvailableForHire && (
-            <span className="inline-block mt-1 px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full font-semibold">
+            <span className="inline-block mt-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded-full">
               🟢 Available for Hire
             </span>
           )}
         </div>
       </div>
 
-      <p className="text-xs text-gray-600 my-4">{bio}</p>
+      <p className="text-xs text-slate-600 my-4 leading-relaxed">{bio}</p>
 
-      <div className="skills-section mb-4">
-        <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Skills</h4>
+      <div className="mb-4">
+        <span className="text-[10px] font-bold uppercase text-slate-400 tracking-wider block mb-2">Technical Skills</span>
         <div className="flex flex-wrap gap-1.5">
           {skills.map((skill) => (
-            <span key={skill} className="px-2 py-0.5 bg-gray-100 text-gray-700 rounded text-xs">
+            <span key={skill} className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-md text-xs font-medium">
               {skill}
             </span>
           ))}
@@ -101,9 +109,9 @@ export function PortfolioCard({
       </div>
 
       {socialLinks.length > 0 && (
-        <div className="socials-section pt-3 border-t border-gray-100 flex gap-3 text-xs text-blue-600">
+        <div className="pt-3 border-t flex gap-3 text-xs text-blue-600 font-medium">
           {socialLinks.map((link) => (
-            <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer">
+            <a key={link.platform} href={link.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
               {link.platform}
             </a>
           ))}
