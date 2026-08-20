@@ -1,32 +1,32 @@
-# 12 - React Hooks: Practical Challenges
+# 12 - React Hooks: Practical Real-World Challenges
 
 ---
 
-## Challenge 1: Persistent Task Management Dashboard
+## Challenge 1: Persistent Task & Sprint Board
 Build a complete task manager:
 - **Hooks**: `useState`, `useEffect`, `useReducer`, `useLocalStorage`.
 - **Features**:
-  - Add, edit, delete, toggle completion of tasks.
-  - Filter by category (All, Work, Personal, Urgent).
-  - Search tasks with debounced input.
-  - Persist all state in `localStorage`.
+  - Add, edit, delete, and toggle task completion.
+  - Category filtering (Frontend, Backend, DevOps, Design).
+  - Search tasks with debounced query.
+  - Persist all tasks in `localStorage`.
 
 ---
 
-## Challenge 2: Multi-City Live Weather Widget
-Build an interactive weather dashboard:
+## Challenge 2: Interactive Meteorological Weather Station
+Build a multi-city weather card:
 - **Hooks**: `useState`, `useEffect`, `useMemo`, `useCallback`.
 - **Features**:
-  - City dropdown with temperature metrics.
-  - Celsius / Fahrenheit toggle with memoized temperature conversion.
-  - Simulated 5-day forecast.
+  - Select city from dropdown with live temperature metrics.
+  - Celsius (°C) and Fahrenheit (°F) toggle with memoized calculation.
+  - 5-day forecast cards.
 
 ---
 
-## Challenge 3: Global Notification Toast Context
-Create a production-grade toast notification system:
-- **Hooks**: `useContext`, `useReducer`, custom `useNotification` hook.
+## Challenge 3: Global Toast Notification System
+Create a production-grade toast context:
+- **Hooks**: `createContext`, `useContext`, `useReducer`, custom `useNotification` hook.
 - **Features**:
-  - Floating container rendering toasts (Success, Error, Warning, Info).
-  - Auto-dismiss after 3000ms.
+  - Floating toast container (Success, Error, Warning, Info).
+  - Auto-dismiss after 3500ms.
   - Manual dismiss button.
