@@ -1,48 +1,49 @@
-// 12 - React Hooks: Solutions for Exercises & Practical Challenges
+// 12 - React Hooks: Complete Solutions
 
-import React, { useState, useEffect, useRef, useContext, createContext } from 'react';
+import React, { useState, useEffect, useRef, useContext, createContext, useReducer } from 'react';
 
-// Solution 1: Toggle Switch
-export function ToggleSwitch() {
+// Solution 1: ToggleLamp
+export function ToggleLamp() {
   const [isOn, setIsOn] = useState(false);
 
   return (
-    <button
-      onClick={() => setIsOn((prev) => !prev)}
-      className={`px-4 py-2 rounded-lg font-bold text-white ${isOn ? 'bg-green-600' : 'bg-gray-600'}`}
-    >
-      {isOn ? 'ON 🟢' : 'OFF ⚪'}
-    </button>
+    <div className="p-4 border rounded-xl text-center max-w-xs bg-white">
+      <div className="text-5xl mb-3">{isOn ? '💡' : '⚪'}</div>
+      <button
+        onClick={() => setIsOn((prev) => !prev)}
+        className={`px-4 py-2 rounded-lg font-bold text-xs text-white ${isOn ? 'bg-amber-500' : 'bg-slate-700'}`}
+      >
+        {isOn ? 'Turn OFF' : 'Turn ON'}
+      </button>
+    </div>
   );
 }
 
-// Solution 3: Document Title Sync
-export function TitleCounter() {
-  const [count, setCount] = useState(0);
+// Solution 5: Window Resize Tracker
+export function WindowResizeTracker() {
+  const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    document.title = `Count: ${count}`;
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return <div className="text-xs font-mono">Current Width: {width}px</div>;
+}
+
+// Solution 6: Previous Count Tracker
+export function PreviousCountTracker({ count }) {
+  const prevCountRef = useRef();
+
+  useEffect(() => {
+    prevCountRef.current = count;
   }, [count]);
 
   return (
-    <button onClick={() => setCount((c) => c + 1)}>
-      Increment ({count})
-    </button>
-  );
-}
-
-// Solution 6: Previous Value Tracker
-export function PreviousValueCounter({ value }) {
-  const prevRef = useRef();
-
-  useEffect(() => {
-    prevRef.current = value;
-  }, [value]);
-
-  return (
-    <div>
-      <p>Current: {value}</p>
-      <p>Previous: {prevRef.current ?? 'N/A'}</p>
+    <div className="text-xs space-y-1">
+      <div>Current Count: <strong>{count}</strong></div>
+      <div className="text-slate-500">Previous Count: <strong>{prevCountRef.current ?? 'N/A'}</strong></div>
     </div>
   );
 }
@@ -50,11 +51,9 @@ export function PreviousValueCounter({ value }) {
 // Solution 18: Custom Hook useToggle
 export function useToggle(initialValue = false) {
   const [value, setValue] = useState(initialValue);
-
   const toggle = () => setValue((v) => !v);
   const setTrue = () => setValue(true);
   const setFalse = () => setValue(false);
-
   return [value, toggle, setTrue, setFalse];
 }
 
@@ -73,8 +72,8 @@ export function useFetch(url) {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
       })
-      .then((data) => {
-        setData(data);
+      .then((json) => {
+        setData(json);
         setLoading(false);
       })
       .catch((err) => {
