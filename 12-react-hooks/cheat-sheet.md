@@ -1,45 +1,33 @@
 # React Hooks: Quick Reference Cheat-Sheet
 
-## 1. Core Hooks Summary
+## 1. Built-in Hooks Reference
 
-| Hook | Signature | Primary Use Case |
+| Hook | Signature | Key Rule / Note |
 | :--- | :--- | :--- |
-| **`useState`** | `const [state, setState] = useState(init)` | Local component state |
-| **`useEffect`** | `useEffect(callback, [deps])` | Side effects, timers, subscriptions |
-| **`useContext`**| `const val = useContext(MyContext)` | Reading global tree context |
-| **`useRef`**    | `const ref = useRef(init)` | DOM node reference, mutable value |
-| **`useReducer`** | `const [state, dispatch] = useReducer(reducer, init)` | Complex state transitions with actions |
-| **`useMemo`**   | `const val = useMemo(() => compute(), [deps])` | Expensive calculation caching |
-| **`useCallback`**| `const fn = useCallback(() => {}, [deps])` | Memoizing callback function reference |
+| **`useState`** | `const [val, setVal] = useState(init)` | Always use `setVal(prev => ...)` for dependent state |
+| **`useEffect`** | `useEffect(callback, [deps])` | Return cleanup function for teardown |
+| **`useContext`**| `const ctx = useContext(MyContext)` | Reads nearest `<MyContext.Provider>` value |
+| **`useRef`**    | `const ref = useRef(init)` | `ref.current` changes do NOT trigger re-renders |
+| **`useReducer`** | `const [state, dispatch] = useReducer(fn, init)` | Pure reducer function `(state, action) => newState` |
+| **`useMemo`**   | `const cached = useMemo(() => compute(), [deps])` | Caches calculation result |
+| **`useCallback`**| `const fn = useCallback(() => {}, [deps])` | Caches function reference |
 
 ---
 
-## 2. `useEffect` Dependency Rules
+## 2. `useEffect` Lifecycle Mapping
 
 ```jsx
-// 1. Runs after every render
+// 1. Every Render:
 useEffect(() => { console.log('Rendered'); });
 
-// 2. Runs once on mount (cleanup on unmount)
+// 2. Mount Only (componentDidMount):
 useEffect(() => {
   console.log('Mounted');
   return () => console.log('Unmounted');
 }, []);
 
-// 3. Runs on mount + whenever 'userId' changes
+// 3. Dependent Update (componentDidUpdate):
 useEffect(() => {
-  fetchUser(userId);
+  console.log('userId changed to:', userId);
 }, [userId]);
-```
-
----
-
-## 3. Custom Hook Pattern
-
-```jsx
-function useCustomHook(param) {
-  const [val, setVal] = useState(param);
-  // combine other hooks...
-  return val;
-}
 ```
