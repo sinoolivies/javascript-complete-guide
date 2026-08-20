@@ -1,65 +1,43 @@
-# React Hooks: Common Mistakes & Pitfalls
+# React Hooks: 12 Common Mistakes & Fixes
 
-## 1. Infinite Render Loop in `useEffect`
-
-### The Bug
+## 1. Infinite Render Loop with `useEffect`
 ```jsx
-// ❌ Bug: setState triggers re-render -> effect runs -> triggers re-render infinitely
+// ❌ WRONG: Missing dependency array triggers infinite render loop!
 useEffect(() => {
   setCount(count + 1);
 });
-```
 
-### The Fix
-Add appropriate dependencies or use an empty array:
-```jsx
-// ✅ Correct
+// ✅ CORRECT: Add dependency array or functional updater
 useEffect(() => {
   setCount((c) => c + 1);
-}, []); // Runs once on mount
+}, []);
 ```
 
 ---
 
-## 2. Mutating State Objects or Arrays
-
-### The Bug
+## 2. Mutating State Directly
 ```jsx
-// ❌ Bug: React will not detect changes because array reference didn't change!
+// ❌ WRONG: Mutating array in place does not trigger re-render
 items.push(newItem);
 setItems(items);
-```
 
-### The Fix
-Return a new array copy:
-```jsx
-// ✅ Correct
+// ✅ CORRECT: Create new array copy
 setItems((prev) => [...prev, newItem]);
 ```
 
 ---
 
-## 3. Stale Closures in `useEffect` or `setInterval`
-
-### The Bug
+## 3. Stale Closures in `setInterval`
 ```jsx
-// ❌ Bug: 'count' inside closure is captured as initial value 0 forever!
+// ❌ WRONG: 'count' is captured as initial value 0 forever
 useEffect(() => {
-  const timer = setInterval(() => {
-    setCount(count + 1);
-  }, 1000);
+  const timer = setInterval(() => setCount(count + 1), 1000);
   return () => clearInterval(timer);
 }, []);
-```
 
-### The Fix
-Use the functional updater form:
-```jsx
-// ✅ Correct
+// ✅ CORRECT: Use functional updater
 useEffect(() => {
-  const timer = setInterval(() => {
-    setCount((prev) => prev + 1);
-  }, 1000);
+  const timer = setInterval(() => setCount((c) => c + 1), 1000);
   return () => clearInterval(timer);
 }, []);
 ```
